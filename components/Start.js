@@ -19,16 +19,25 @@ const Start = ({ navigation }) => {
       </View>
       <View style={[styles.wrapper, styles.whiteBackground]}>
         <TextInput
-          style={styles.nameInput}
+          style={[styles.text, styles.nameInput]}
           value={name}
           onChangeText={setName}
           placeholder="Your Name"
         />
+        <View style={styles.chooseBackgroundWrapper}>
+          <Text style={styles.text}>Choose Background Color:</Text>
+          <View style={styles.circlesWrapper}>
+            <TouchableOpacity style={[styles.circle, styles.circle1]} />
+            <TouchableOpacity style={[styles.circle, styles.circle2]} />
+            <TouchableOpacity style={[styles.circle, styles.circle3]} />
+            <TouchableOpacity style={[styles.circle, styles.circle4]} />
+          </View>
+        </View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Chat')}
         >
-          <Text style={styles.buttonText}>Start the Chat</Text>
+          <Text style={[styles.text, styles.buttonText]}>Start the Chat</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -56,9 +65,36 @@ const styles = StyleSheet.create({
   whiteBackground: {
     backgroundColor: '#FFFFFF',
   },
-  nameInput: {
+  chooseBackgroundWrapper: {
+    alignSelf: 'flex-start',
+  },
+  text: {
     fontSize: 16,
     fontWeight: '300',
+  },
+  circlesWrapper: {
+    flexDirection: 'row',
+  },
+  circle: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    marginRight: '6%',
+    marginTop: '3%',
+  },
+  circle1: {
+    backgroundColor: '#090C08',
+  },
+  circle2: {
+    backgroundColor: '#474056',
+  },
+  circle3: {
+    backgroundColor: '#8A95A5',
+  },
+  circle4: {
+    backgroundColor: '#B9C6AE',
+  },
+  nameInput: {
     color: '#757083',
     opacity: 0.5,
     borderWidth: 1,
@@ -74,7 +110,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    fontSize: 16,
     fontWeight: '600',
     color: '#FFFFFF',
   },
