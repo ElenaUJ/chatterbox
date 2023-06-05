@@ -9,8 +9,11 @@ import {
 } from 'react-native';
 import image from '../assets/background-image.png';
 
+const colors = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
+
 const Start = ({ navigation }) => {
   const [name, setName] = useState('');
+  const [color, setColor] = useState('');
 
   return (
     <ImageBackground source={image} style={styles.image} resizeMode="cover">
@@ -27,15 +30,45 @@ const Start = ({ navigation }) => {
         <View style={styles.chooseBackgroundWrapper}>
           <Text style={styles.text}>Choose Background Color:</Text>
           <View style={styles.circlesWrapper}>
-            <TouchableOpacity style={[styles.circle, styles.circle1]} />
-            <TouchableOpacity style={[styles.circle, styles.circle2]} />
-            <TouchableOpacity style={[styles.circle, styles.circle3]} />
-            <TouchableOpacity style={[styles.circle, styles.circle4]} />
+            <TouchableOpacity
+              style={[
+                styles.circle,
+                styles.circle1,
+                color === colors[0] && styles.selected,
+              ]}
+              onPress={() => setColor(colors[0])}
+            />
+            <TouchableOpacity
+              style={[
+                styles.circle,
+                styles.circle2,
+                color === colors[1] && styles.selected,
+              ]}
+              onPress={() => setColor(colors[1])}
+            />
+            <TouchableOpacity
+              style={[
+                styles.circle,
+                styles.circle3,
+                color === colors[2] && styles.selected,
+              ]}
+              onPress={() => setColor(colors[2])}
+            />
+            <TouchableOpacity
+              style={[
+                styles.circle,
+                styles.circle4,
+                color === colors[3] && styles.selected,
+              ]}
+              onPress={() => setColor(colors[3])}
+            />
           </View>
         </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Chat')}
+          onPress={() =>
+            navigation.navigate('Chat', { name: name, color: color })
+          }
         >
           <Text style={[styles.text, styles.buttonText]}>Start the Chat</Text>
         </TouchableOpacity>
@@ -76,23 +109,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   circle: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
+    height: 44,
+    width: 44,
+    borderRadius: 22,
     marginRight: '6%',
     marginTop: '3%',
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
+  },
+  selected: {
+    borderColor: '#FF7518',
   },
   circle1: {
-    backgroundColor: '#090C08',
+    backgroundColor: colors[0],
   },
   circle2: {
-    backgroundColor: '#474056',
+    backgroundColor: colors[1],
   },
   circle3: {
-    backgroundColor: '#8A95A5',
+    backgroundColor: colors[2],
   },
   circle4: {
-    backgroundColor: '#B9C6AE',
+    backgroundColor: colors[3],
   },
   nameInput: {
     color: '#757083',
