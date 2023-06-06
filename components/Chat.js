@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, View, StyleSheet } from 'react-native';
-import { Bubble, GiftedChat } from 'react-native-gifted-chat';
+import {
+  Bubble,
+  Day,
+  GiftedChat,
+  Send,
+  SystemMessage,
+} from 'react-native-gifted-chat';
 
 const Chat = ({ route, navigation }) => {
   const { name, color } = route.params;
@@ -56,13 +62,62 @@ const Chat = ({ route, navigation }) => {
     return (
       <Bubble
         {...props}
+        timeTextStyle={{
+          right: {
+            color: '#FFF',
+          },
+          left: {
+            color: '#F2F2F2',
+          },
+        }}
+        textStyle={{
+          right: {
+            color: '#FFF',
+          },
+          left: {
+            color: '#F2F2F2',
+          },
+        }}
         wrapperStyle={{
           right: {
-            backgroundColor: '#FF7F50',
+            backgroundColor: '#FF6B6B',
           },
           left: {
             backgroundColor: '#68C3D4',
           },
+        }}
+      />
+    );
+  };
+
+  const renderDay = (props) => {
+    return (
+      <Day
+        {...props}
+        textStyle={{
+          color: '#F2F2F2',
+        }}
+      />
+    );
+  };
+
+  const renderSend = (props) => {
+    return (
+      <Send
+        {...props}
+        textStyle={{
+          color: '#68C3D4',
+        }}
+      />
+    );
+  };
+
+  const renderSystemMessage = (props) => {
+    return (
+      <SystemMessage
+        {...props}
+        textStyle={{
+          color: '#F2F2F2',
         }}
       />
     );
@@ -74,6 +129,10 @@ const Chat = ({ route, navigation }) => {
         messages={messages}
         onSend={(messages) => onSend(messages)}
         renderBubble={renderBubble}
+        renderDay={renderDay}
+        renderSend={renderSend}
+        renderSystemMessage={renderSystemMessage}
+        sendButtonProps={{ color: 'red' }}
         user={{ _id: 1 }}
       />
       {/* Fix display issue on old Android phones - React Native can check for platform used by user */}
