@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Platform, View, StyleSheet } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 const Chat = ({ route, navigation }) => {
@@ -51,6 +51,10 @@ const Chat = ({ route, navigation }) => {
         onSend={(messages) => onSend(messages)}
         user={{ _id: 1 }}
       />
+      {/* Fix display issue on old Android phones - React Native can check for platform used by user */}
+      {Platform.OS === 'android' ? (
+        <KeyboardAvoidingView behaviour="height" />
+      ) : null}
     </View>
   );
 };
