@@ -31,13 +31,13 @@ const Chat = ({ route, navigation }) => {
         user: {
           _id: 2,
           name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
+          avatar: 'https://picsum.photos/140',
         },
       },
-      // Setting example system message
+      // Setting system message to indicate chat has been entered
       {
         _id: 2,
-        text: 'This is a system message',
+        text: 'You have entered the chat.',
         createdAt: new Date(),
         system: true,
       },
@@ -51,17 +51,17 @@ const Chat = ({ route, navigation }) => {
     );
   };
 
-  // Altering speech bubble, inheriting its props but changing wrapperStyle
+  // // Altering speech bubble, inheriting its props but changing wrapperStyle
   const renderBubble = (props) => {
     return (
       <Bubble
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: '#000',
+            backgroundColor: '#FF7F50',
           },
           left: {
-            backgroundColor: '#FFF',
+            backgroundColor: '#68C3D4',
           },
         }}
       />

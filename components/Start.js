@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     borderColor: '#FFFFFF',
   },
   selected: {
-    borderColor: '#FF7518',
+    borderColor: '#FF7F50',
   },
   circle1: {
     backgroundColor: colors[0],
