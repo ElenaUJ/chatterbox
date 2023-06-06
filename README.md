@@ -75,6 +75,7 @@ This project has the following dependencies:
 - "expo-status-bar": "~1.4.4",
 - "react": "18.2.0",
 - "react-native": "0.71.8",
+- "react-native-gifted-chat": "^2.1.0",
 - "react-native-safe-area-context": "^4.5.3",
 - "react-native-screens": "^3.20.0"
 
