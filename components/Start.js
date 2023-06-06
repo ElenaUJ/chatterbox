@@ -20,18 +20,13 @@ const Start = ({ navigation }) => {
   return (
     <ImageBackground source={image} style={styles.image} resizeMode="cover">
       <View style={styles.wrapper}>
-        <Text
-          style={styles.appTitle}
-          accessible={true}
-          accessibilityHint="Chat app title"
-        >
+        <Text style={styles.appTitle} accessibilityHint="Chat app title">
           Chatterbox
         </Text>
       </View>
       <View style={[styles.wrapper, styles.whiteBackground]}>
         <TextInput
           style={[styles.text, styles.nameInput]}
-          accessible={true}
           accessibilityLabel="Username input"
           accessibilityHint="This field allows you to set the username for the chat."
           onChangeText={setName}
@@ -47,7 +42,6 @@ const Start = ({ navigation }) => {
                 styles.circle1,
                 color === colors[0] && styles.selected,
               ]}
-              accessible={true}
               accessibilityLabel="Select black as background color"
               accessibilityHint="Tap to choose black as the background color for the chat."
               accessibilityRole="button"
@@ -59,7 +53,6 @@ const Start = ({ navigation }) => {
                 styles.circle2,
                 color === colors[1] && styles.selected,
               ]}
-              accessible={true}
               accessibilityLabel="Select plum as background color"
               accessibilityHint="Tap to choose plum as the background color for the chat."
               accessibilityRole="button"
@@ -71,7 +64,6 @@ const Start = ({ navigation }) => {
                 styles.circle3,
                 color === colors[2] && styles.selected,
               ]}
-              accessible={true}
               accessibilityLabel="Select gray as background color"
               accessibilityHint="Tap to choose gray as the background color for the chat."
               accessibilityRole="button"
@@ -83,7 +75,6 @@ const Start = ({ navigation }) => {
                 styles.circle4,
                 color === colors[3] && styles.selected,
               ]}
-              accessible={true}
               accessibilityLabel="Select green as background color"
               accessibilityHint="Tap to choose green as the background color for the chat."
               accessibilityRole="button"
@@ -93,7 +84,6 @@ const Start = ({ navigation }) => {
         </View>
         <TouchableOpacity
           style={styles.button}
-          accessible={true}
           accessibilityLabel="Start the chat"
           accessibilityHint="Tap to to start chat."
           accessibilityRole="button"

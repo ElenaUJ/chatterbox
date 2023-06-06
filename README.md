@@ -97,5 +97,3 @@ Furthermore, it uses the following linting configuration:
 - Two additional communication features: sending images and location data.
 
 - Data gets stored online and offline.
-
-- Accessibility

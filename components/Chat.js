@@ -43,7 +43,7 @@ const Chat = ({ route, navigation }) => {
       // Setting system message to indicate chat has been entered
       {
         _id: 2,
-        text: 'You have entered the chat.',
+        text: 'You entered the chat.',
         createdAt: new Date(),
         system: true,
       },
