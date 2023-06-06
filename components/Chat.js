@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, View, StyleSheet } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 
 const Chat = ({ route, navigation }) => {
   const { name, color } = route.params;
@@ -34,6 +34,13 @@ const Chat = ({ route, navigation }) => {
           avatar: 'https://placeimg.com/140/140/any',
         },
       },
+      // Setting example system message
+      {
+        _id: 2,
+        text: 'This is a system message',
+        createdAt: new Date(),
+        system: true,
+      },
     ]);
   }, []);
 
@@ -44,11 +51,29 @@ const Chat = ({ route, navigation }) => {
     );
   };
 
+  // Altering speech bubble, inheriting its props but changing wrapperStyle
+  const renderBubble = (props) => {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: '#000',
+          },
+          left: {
+            backgroundColor: '#FFF',
+          },
+        }}
+      />
+    );
+  };
+
   return (
     <View style={backgroundStyle.background}>
       <GiftedChat
         messages={messages}
         onSend={(messages) => onSend(messages)}
+        renderBubble={renderBubble}
         user={{ _id: 1 }}
       />
       {/* Fix display issue on old Android phones - React Native can check for platform used by user */}
