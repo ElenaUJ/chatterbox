@@ -1,9 +1,19 @@
 import { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Platform, View, StyleSheet } from 'react-native';
+import {
+  Bubble,
+  Day,
+  GiftedChat,
+  Send,
+  SystemMessage,
+} from 'react-native-gifted-chat';
 
 const Chat = ({ route, navigation }) => {
   const { name, color } = route.params;
+
+  // State initializations
   const [backgroundColor, setBackgroundColor] = useState('#090C08');
+  const [messages, setMessages] = useState([]);
 
   const backgroundStyle = StyleSheet.create({
     background: {
@@ -16,9 +26,121 @@ const Chat = ({ route, navigation }) => {
   useEffect(() => {
     navigation.setOptions({ title: name });
     setBackgroundColor(color);
+    // Setting static message to be able to see changes in the UI
+    // Each message requires ID, creation date and user object as per Gifted Chat library
+    // User object requires ID, name, avatar
+    setMessages([
+      {
+        _id: 1,
+        text: 'Hello developer',
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'React Native',
+          avatar: 'https://picsum.photos/140',
+        },
+      },
+      // Setting system message to indicate chat has been entered
+      {
+        _id: 2,
+        text: 'You entered the chat.',
+        createdAt: new Date(),
+        system: true,
+      },
+    ]);
   }, []);
 
-  return <View style={backgroundStyle.background}></View>;
+  // setMessages() is called with callback function, that appends the new message to the previousMessages array, resulting in the newMessages array
+  const onSend = (newMessages) => {
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, newMessages)
+    );
+  };
+
+  // // Altering speech bubble, inheriting its props but changing wrapperStyle
+  const renderBubble = (props) => {
+    return (
+      <Bubble
+        {...props}
+        timeTextStyle={{
+          right: {
+            color: '#FFF',
+          },
+          left: {
+            color: '#F2F2F2',
+          },
+        }}
+        textStyle={{
+          right: {
+            color: '#FFF',
+          },
+          left: {
+            color: '#F2F2F2',
+          },
+        }}
+        wrapperStyle={{
+          right: {
+            backgroundColor: '#FF6B6B',
+          },
+          left: {
+            backgroundColor: '#68C3D4',
+          },
+        }}
+      />
+    );
+  };
+
+  const renderDay = (props) => {
+    return (
+      <Day
+        {...props}
+        textStyle={{
+          color: '#F2F2F2',
+        }}
+      />
+    );
+  };
+
+  const renderSend = (props) => {
+    return (
+      <Send
+        {...props}
+        textStyle={{
+          color: '#68C3D4',
+        }}
+      />
+    );
+  };
+
+  const renderSystemMessage = (props) => {
+    return (
+      <SystemMessage
+        {...props}
+        textStyle={{
+          color: '#F2F2F2',
+        }}
+      />
+    );
+  };
+
+  return (
+    <View style={backgroundStyle.background}>
+      <GiftedChat
+        messages={messages}
+        onSend={(messages) => onSend(messages)}
+        renderBubble={renderBubble}
+        renderDay={renderDay}
+        renderSend={renderSend}
+        renderSystemMessage={renderSystemMessage}
+        sendButtonProps={{ color: 'red' }}
+        user={{ _id: 1 }}
+      />
+      {/* Fix display issue on old Android phones - React Native can check for platform used by user */}
+      {Platform.OS === 'android' ? (
+        <KeyboardAvoidingView behaviour="height" />
+      ) : null}
+    </View>
+  );
 };
 
 export default Chat;
