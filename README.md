@@ -12,7 +12,7 @@
 
 ## Overview
 
-This app is still under construction. It is built with React Native and Expo, JavaScript frameworks facilitating the development of cross-platform native applications.
+This app is still under construction. It is built with React Native and Expo, JavaScript frameworks facilitating the development of cross-platform native applications. The implementation includes the utilization of the Google Firestore Cloud database and incorporates the real-time WebSockets protocol for the storage and retrieval of chat messages.
 
 It will provide users with a chat interface and options to share their images and their location.
 
@@ -64,6 +64,7 @@ To test the app you can use:
 
 - React Native
 - Expo
+- Google Firestore
 
 ### Dependencies
 
@@ -73,6 +74,7 @@ This project has the following dependencies:
 - "@react-navigation/native-stack": "^6.9.12",
 - "expo": "~48.0.18",
 - "expo-status-bar": "~1.4.4",
+- "firebase": "^9.13.0",
 - "react": "18.2.0",
 - "react-native": "0.71.8",
 - "react-native-gifted-chat": "^2.1.0",
