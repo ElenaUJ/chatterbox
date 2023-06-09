@@ -7,7 +7,13 @@ import {
   Send,
   SystemMessage,
 } from 'react-native-gifted-chat';
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestone';
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+} from 'firebase/firestone';
 
 const Chat = ({ db, navigation, route }) => {
   const [backgroundColor, setBackgroundColor] = useState('#090C08');
@@ -43,10 +49,11 @@ const Chat = ({ db, navigation, route }) => {
       // Document properties (like text, time) can be extracted as an object with the .data() function (represeting document's fields and values)
       docsSnapshot.forEach((doc) => {
         newMessages.push({
-          // Question: Why do we need another id property, if it's already in the document? Won't it be the same anyway?
+          // The doc ID is typically not included in the what the data() method retrieves from the Firestoe document
           id: doc.id,
           ...doc.data(),
           // Date has to be converted, because the way Firestore saves the date is in another format than Gifted Chat needs
+          // Question: Won't the new message object have two createdAt objects then? Does it matter?
           createdAt: new Date(doc.data().createdAt.toMillis()),
         });
       });
@@ -84,9 +91,8 @@ const Chat = ({ db, navigation, route }) => {
 
   // setMessages() is called with callback function, that appends the new message to the previousMessages array, resulting in the newMessages array
   const onSend = (newMessages) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, newMessages)
-    );
+    // addDod() automatically adds .id to newly generated document
+    addDoc(collection(db, 'messages'), newMessages[0]);
   };
 
   // Altering speech bubble, inheriting its props but changing wrapperStyle
