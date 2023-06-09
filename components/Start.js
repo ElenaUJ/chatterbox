@@ -11,9 +11,15 @@ import {
   View,
 } from 'react-native';
 import { getAuth, signInAnonymously } from 'firebase/auth';
-import image from '../assets/background-image.png';
+import backgroundImage from '../assets/background-image.png';
 
-const colors = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
+const colorsObject = {
+  JET_BLACK: '#090C08',
+  DEEP_PURPLE: '#474056',
+  SLATE_GRAY: '#8A95A5',
+  SAND_BEIGE: '#B9C6AE',
+};
+const { JET_BLACK, DEEP_PURPLE, SLATE_GRAY, SAND_BEIGE } = colorsObject;
 
 const Start = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -39,7 +45,11 @@ const Start = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={image} style={styles.image} resizeMode="cover">
+    <ImageBackground
+      source={backgroundImage}
+      style={styles.backgroundImage}
+      resizeMode="cover"
+    >
       <View style={styles.wrapper}>
         <Text style={styles.appTitle} accessibilityHint="Chat app title">
           Chatterbox
@@ -61,45 +71,45 @@ const Start = ({ navigation }) => {
               style={[
                 styles.circle,
                 styles.circle1,
-                color === colors[0] && styles.selected,
+                color === JET_BLACK && styles.selected,
               ]}
               accessibilityLabel="Select black as background color"
               accessibilityHint="Tap to choose black as the background color for the chat."
               accessibilityRole="button"
-              onPress={() => setColor(colors[0])}
+              onPress={() => setColor(JET_BLACK)}
             />
             <TouchableOpacity
               style={[
                 styles.circle,
                 styles.circle2,
-                color === colors[1] && styles.selected,
+                color === DEEP_PURPLE && styles.selected,
               ]}
               accessibilityLabel="Select plum as background color"
               accessibilityHint="Tap to choose plum as the background color for the chat."
               accessibilityRole="button"
-              onPress={() => setColor(colors[1])}
+              onPress={() => setColor(DEEP_PURPLE)}
             />
             <TouchableOpacity
               style={[
                 styles.circle,
                 styles.circle3,
-                color === colors[2] && styles.selected,
+                color === SLATE_GRAY && styles.selected,
               ]}
               accessibilityLabel="Select gray as background color"
               accessibilityHint="Tap to choose gray as the background color for the chat."
               accessibilityRole="button"
-              onPress={() => setColor(colors[2])}
+              onPress={() => setColor(SLATE_GRAY)}
             />
             <TouchableOpacity
               style={[
                 styles.circle,
                 styles.circle4,
-                color === colors[3] && styles.selected,
+                color === SAND_BEIGE && styles.selected,
               ]}
               accessibilityLabel="Select green as background color"
               accessibilityHint="Tap to choose green as the background color for the chat."
               accessibilityRole="button"
-              onPress={() => setColor(colors[3])}
+              onPress={() => setColor(SAND_BEIGE)}
             />
           </View>
         </View>
@@ -121,7 +131,7 @@ const Start = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  image: {
+  backgroundImage: {
     flex: 1,
     padding: '6%',
   },
@@ -164,16 +174,16 @@ const styles = StyleSheet.create({
     borderColor: '#FF7F50',
   },
   circle1: {
-    backgroundColor: colors[0],
+    backgroundColor: JET_BLACK,
   },
   circle2: {
-    backgroundColor: colors[1],
+    backgroundColor: DEEP_PURPLE,
   },
   circle3: {
-    backgroundColor: colors[2],
+    backgroundColor: SLATE_GRAY,
   },
   circle4: {
-    backgroundColor: colors[3],
+    backgroundColor: SAND_BEIGE,
   },
   nameInput: {
     color: '#757083',
