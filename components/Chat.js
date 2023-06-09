@@ -13,7 +13,7 @@ import {
   onSnapshot,
   orderBy,
   query,
-} from 'firebase/firestone';
+} from 'firebase/firestore';
 
 const Chat = ({ db, navigation, route }) => {
   const [backgroundColor, setBackgroundColor] = useState('#090C08');
