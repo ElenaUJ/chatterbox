@@ -7,7 +7,7 @@ import {
   Send,
   SystemMessage,
 } from 'react-native-gifted-chat';
-import { collection, onSnapshot } from 'firebase/firestone';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestone';
 
 const Chat = ({ db, navigation, route }) => {
   const [backgroundColor, setBackgroundColor] = useState('#090C08');
@@ -30,21 +30,28 @@ const Chat = ({ db, navigation, route }) => {
 
     // Getting real-time updates of the database
     // Fetches collection upon mounting, actively listens to changes done to the collection, and will then fetch updated documents
-    // onSnapshot takes 2 arguments: 1. reference, 2. callback function that will be called whenever a change has been detected (and once at the start)
-    const unsubMessages = onSnapshot(
-      // collection() has 2 arguments, its first is the database object, second is collection name
+    // collection() has 2 arguments, its first is the database object, second is collection name
+    const query = query(
       collection(db, 'messages'),
-      (docsSnapshot) => {
-        let newMessages = [];
-
-        // Every object has a document ID `.id`
-        // Document properties (like text, time) can be extracted as an object with the .data() function
-        docsSnapshot.forEach((doc) => {
-          newMessages.push({ id: doc.id, ...doc.data() });
-        });
-        setMessages(newMessages);
-      }
+      orderBy('createdAt', 'desc')
     );
+    // onSnapshot takes 2 arguments: 1. reference, 2. callback function that will be called whenever a change has been detected (and once at the start)
+    const unsubMessages = onSnapshot(query, (docsSnapshot) => {
+      let newMessages = [];
+
+      // Every object has a document ID `.id`
+      // Document properties (like text, time) can be extracted as an object with the .data() function (represeting document's fields and values)
+      docsSnapshot.forEach((doc) => {
+        newMessages.push({
+          // Question: Why do we need another id property, if it's already in the document? Won't it be the same anyway?
+          id: doc.id,
+          ...doc.data(),
+          // Date has to be converted, because the way Firestore saves the date is in another format than Gifted Chat needs
+          createdAt: new Date(doc.data().createdAt.toMillis()),
+        });
+      });
+      setMessages(newMessages);
+    });
     // return statement in useEffect will be executed when component is unmounted
     // Cleaning up code, only when unsubMessages is not undefined (to avoid memory leaks)
     // Stops listening to changes
