@@ -37,12 +37,9 @@ const Chat = ({ db, navigation, route }) => {
     // Getting real-time updates of the database
     // Fetches collection upon mounting, actively listens to changes done to the collection, and will then fetch updated documents
     // collection() has 2 arguments, its first is the database object, second is collection name
-    const query = query(
-      collection(db, 'messages'),
-      orderBy('createdAt', 'desc')
-    );
+    const q = query(collection(db, 'messages'), orderBy('createdAt', 'desc'));
     // onSnapshot takes 2 arguments: 1. reference, 2. callback function that will be called whenever a change has been detected (and once at the start)
-    const unsubMessages = onSnapshot(query, (docsSnapshot) => {
+    const unsubMessages = onSnapshot(q, (docsSnapshot) => {
       let newMessages = [];
 
       // Every object has a document ID `.id`
