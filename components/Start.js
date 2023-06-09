@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Alert,
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
@@ -9,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { getAuth, signInAnonymously } from 'firebase/auth';
 import image from '../assets/background-image.png';
 
 const colors = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
@@ -16,6 +18,25 @@ const colors = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
 const Start = ({ navigation }) => {
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
+
+  // Initialization of Firebase authentication handler
+  const auth = getAuth();
+
+  // Sign-in logic function (signInAnonymously returns a promise and an information object with the temporary user account)
+  const signInUser = () => {
+    signInAnonymously(auth)
+      .then((result) => {
+        navigation.navigate('Chat', {
+          name: name,
+          color: color,
+          userID: result.user.uid,
+        });
+        Alert.alert('Signed in successfully!');
+      })
+      .catch((error) => {
+        Alert.alert('Unable to sign in, please try again later.');
+      });
+  };
 
   return (
     <ImageBackground source={image} style={styles.image} resizeMode="cover">
@@ -87,9 +108,7 @@ const Start = ({ navigation }) => {
           accessibilityLabel="Start the chat"
           accessibilityHint="Tap to to start chat."
           accessibilityRole="button"
-          onPress={() =>
-            navigation.navigate('Chat', { name: name, color: color })
-          }
+          onPress={signInUser}
         >
           <Text style={[styles.text, styles.buttonText]}>Start the Chat</Text>
         </TouchableOpacity>
