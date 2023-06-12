@@ -42,6 +42,7 @@ const Chat = ({ db, navigation, route }) => {
     const unsubMessages = onSnapshot(q, (docsSnapshot) => {
       let newMessages = [];
 
+      // For each Firestore doc, we create a new message compatible with Gifted Chat
       // Every object has a document ID `.id`
       // Document properties (like text, time) can be extracted as an object with the .data() function (represeting document's fields and values)
       docsSnapshot.forEach((doc) => {
@@ -87,10 +88,9 @@ const Chat = ({ db, navigation, route }) => {
     // ]);
   }, []);
 
-  // setMessages() is called with callback function, that appends the new message to the previousMessages array, resulting in the newMessages array
+  // setMessages() is called with callback function, that appends the new message to the previousMessages array, resulting in the newMessages array (set up in a way that multiple messages could be sent at the same time)
   const onSend = (newMessages) => {
     // addDod() automatically adds .id to newly generated document
-    // Question: What I don't understand here is why the parameter passed into this function has to be an array of messages and not just the one new message?
     // Question: Will the Gifted Chat createdAt property now translated into the Firestore timestamp in this function, hence why it has to be translated back upon fetching?
     addDoc(collection(db, 'messages'), newMessages[0]);
   };
