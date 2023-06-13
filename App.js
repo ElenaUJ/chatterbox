@@ -36,6 +36,7 @@ const App = () => {
   const db = getFirestore(app);
 
   // Definition of state representing network connectivity status
+  // Firebase reconnection attempts are to be disabled when user if offline/reenabled when user is online
   const connectionStatus = useNetInfo();
   useEffect(() => {
     // ===false because ! would also be truthy for null which is is useNetInfo(),s initial value
@@ -53,7 +54,13 @@ const App = () => {
         <Stack.Screen name="Start" component={Start} />
         {/* To pass the db reference as a prop, this format can be used */}
         <Stack.Screen name="Chat">
-          {(props) => <Chat db={db} {...props} />}
+          {(props) => (
+            <Chat
+              db={db}
+              isConnected={connectionStatus.isConnected}
+              {...props}
+            />
+          )}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
