@@ -9,7 +9,17 @@ import Chat from './components/Chat.js';
 
 // Importing Firestore
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import {
+  disableNetwork,
+  enableNetwork,
+  getFirestore,
+} from 'firebase/firestore';
+
+//Importing useNetInfo to access latest value of network connection state (state object that updates automatically, like a React Hook)
+// Best to be used in root/main component to have state available go=lobally
+import { useNetInfo } from '@react-native-community/netinfo';
+import { useEffect } from 'react';
+import { Alert } from 'react-native';
 
 const App = () => {
   // Configuration code has been generated in my firestore project in browser
@@ -24,6 +34,18 @@ const App = () => {
   // Initialization of Firebase and Cloud Firestore database (should be done in root component)
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
+  // Definition of state representing network connectivity status
+  const connectionStatus = useNetInfo();
+  useEffect(() => {
+    // ===false because ! would also be truthy for null which is is useNetInfo(),s initial value
+    if (connectionStatus.isConnected === false) {
+      Alert.alert('Connection lost!');
+      disableNetwork(db);
+    } else if (connectionStatus.isConnected === true) {
+      enableNetwork(db);
+    }
+  }, [connectionStatus.isConnected]);
 
   return (
     <NavigationContainer>

@@ -82,6 +82,7 @@ This project has the following dependencies:
 - "react-native-safe-area-context": "^4.5.3",
 - "react-native-screens": "^3.20.0"
 - "@react-native-async-storage/async-storage": "1.17.11"
+- "@react-native-community/netinfo": "9.3.7"
 
 And dev dependencies:
 
