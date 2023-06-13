@@ -4,6 +4,7 @@ import {
   Bubble,
   Day,
   GiftedChat,
+  InputToolbar,
   Send,
   SystemMessage,
 } from 'react-native-gifted-chat';
@@ -157,6 +158,15 @@ const Chat = ({ db, isConnected, navigation, route }) => {
     );
   };
 
+  // Only show input toolbar when online
+  const renderInputToolbar = (props) => {
+    if (isConnected) {
+      return <InputToolbar {...props} />;
+    } else {
+      return null;
+    }
+  };
+
   const renderSend = (props) => {
     return (
       <Send
@@ -186,6 +196,7 @@ const Chat = ({ db, isConnected, navigation, route }) => {
         onSend={(messages) => onSend(messages)}
         renderBubble={renderBubble}
         renderDay={renderDay}
+        renderInputToolbar={renderInputToolbar}
         renderSend={renderSend}
         renderSystemMessage={renderSystemMessage}
         sendButtonProps={{ color: 'red' }}
