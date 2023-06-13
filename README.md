@@ -12,7 +12,7 @@
 
 ## Overview
 
-This app is still under construction. It is built with React Native and Expo, JavaScript frameworks facilitating the development of cross-platform native applications. The implementation includes the utilization of the Google Firestore Cloud database and incorporates the real-time WebSockets protocol for the storage and retrieval of chat messages.
+This app is still under construction. It is built with React Native and Expo, JavaScript frameworks facilitating the development of cross-platform native applications. The implementation includes the utilization of the Google Firestore Cloud database and incorporates the real-time WebSockets protocol for the storage and retrieval of chat messages. Messages will be stored locally using the React Native AsyncStorage library.
 
 It will provide users with a chat interface and options to share their images and their location.
 
@@ -65,6 +65,7 @@ To test the app you can use:
 - React Native
 - Expo
 - Google Firestore
+- AsyncStorage
 
 ### Dependencies
 
@@ -80,6 +81,8 @@ This project has the following dependencies:
 - "react-native-gifted-chat": "^2.1.0",
 - "react-native-safe-area-context": "^4.5.3",
 - "react-native-screens": "^3.20.0"
+- "@react-native-async-storage/async-storage": "1.17.11"
+- "@react-native-community/netinfo": "9.3.7"
 
 And dev dependencies:
 
