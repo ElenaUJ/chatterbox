@@ -29,6 +29,16 @@ const Chat = ({ db, navigation, route }) => {
     },
   });
 
+  // try-catch block is a safety measure to prevent app from crashing if it's unable to store data
+  const cacheMessages = async (messagesToCache) => {
+    try {
+      // AsyncStorage can only store string values
+      await AsyncStorage.setItem('messages', JSON.stringify(messagesToCache));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   // Empty array because we only want to execute code once when the component is mounted
   useEffect(() => {
     // To be executed when mounted/updated
@@ -57,6 +67,7 @@ const Chat = ({ db, navigation, route }) => {
           createdAt: new Date(doc.data().createdAt.toMillis()),
         });
       });
+      cacheMessages(newMessages);
       setMessages(newMessages);
     });
     // return statement in useEffect will be executed when component is unmounted
