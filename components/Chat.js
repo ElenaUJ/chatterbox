@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
 import {
   Bubble,
-  CustomActions,
   Day,
   GiftedChat,
   InputToolbar,
@@ -17,6 +16,7 @@ import {
   query,
 } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MapView from 'react-native-maps';
 import CustomActions from './CustomActions.js';
 
 const Chat = ({ db, isConnected, navigation, route }) => {
@@ -151,6 +151,31 @@ const Chat = ({ db, isConnected, navigation, route }) => {
     return <CustomActions {...props} />;
   };
 
+  const renderCustomView = (props) => {
+    const { currentMessage } = props;
+    const currentLocation = currentMessage.location;
+
+    if (currentLocation) {
+      return (
+        <MapView
+          style={{
+            width: 150,
+            height: 100,
+            borderRadius: 13,
+            margin: 3,
+          }}
+          region={{
+            latitude: currentLocation.latitude,
+            longitude: currentLocation.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  };
+
   const renderDay = (props) => {
     return (
       <Day
@@ -200,6 +225,7 @@ const Chat = ({ db, isConnected, navigation, route }) => {
         onSend={(messages) => onSend(messages)}
         renderActions={renderCustomActions}
         renderBubble={renderBubble}
+        renderCustomView={renderCustomView}
         renderDay={renderDay}
         renderInputToolbar={renderInputToolbar}
         renderSend={renderSend}
