@@ -83,6 +83,8 @@ This project has the following dependencies:
 - "react-native-screens": "^3.20.0"
 - "@react-native-async-storage/async-storage": "1.17.11"
 - "@react-native-community/netinfo": "9.3.7"
+- "expo-location": "~15.1.1",
+- "react-native-maps": "1.3.2"
 
 And dev dependencies:
 
