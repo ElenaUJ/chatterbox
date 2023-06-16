@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
 import {
   Bubble,
+  CustomActions,
   Day,
   GiftedChat,
   InputToolbar,
@@ -16,6 +17,7 @@ import {
   query,
 } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomActions from './CustomActions.js';
 
 const Chat = ({ db, isConnected, navigation, route }) => {
   const [backgroundColor, setBackgroundColor] = useState('#090C08');
@@ -145,6 +147,10 @@ const Chat = ({ db, isConnected, navigation, route }) => {
     );
   };
 
+  const renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
   const renderDay = (props) => {
     return (
       <Day
@@ -192,6 +198,7 @@ const Chat = ({ db, isConnected, navigation, route }) => {
       <GiftedChat
         messages={messages}
         onSend={(messages) => onSend(messages)}
+        renderActions={renderCustomActions}
         renderBubble={renderBubble}
         renderDay={renderDay}
         renderInputToolbar={renderInputToolbar}
