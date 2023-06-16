@@ -1,17 +1,61 @@
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import * as ImagePicker from 'expo-image-picker';
+import { ref, uploadBytes } from 'firebase/storage';
 import * as Location from 'expo-location';
 
 // wrapperStyle and iconTextStyle are props being passed from Chat.js, to potentially modify the component's style from outside of the component
-const CustomActions = ({ iconTextStyle, onSend, wrapperStyle }) => {
+const CustomActions = ({
+  iconTextStyle,
+  onSend,
+  storage,
+  userID,
+  wrapperStyle,
+}) => {
   // Fetching the ActionSheet reference object
   const actionSheet = useActionSheet();
+
+  // Function to generate unique reference name for image upload
+  const generateReference = (uri) => {
+    // getTime() method converts data object into milliseconds -> turns it into numeric value
+    const timeStamp = new Date().getTime();
+    // Splits the path into array of substrings at every /, and the only uses the last value of the array, the actual file name
+    const imageName = uri.split('/')[uri.split('/').length - 1];
+    return `${userID}-${timeStamp}-${imageName}`;
+  };
+
+  const pickImage = async () => {
+    let permissions = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissions?.granted) {
+      let result = await ImagePicker.launchImageLibraryAsync();
+
+      if (!result.canceled) {
+        const imageURI = result.assets[0].uri;
+        const uniqueRefString = generateReference(imageURI);
+        const response = await fetch(imageURI);
+        // Firebase needs the image to be converted into a blob (binary large object)
+        const blob = await response.blob();
+        // Creation of reference on Storage cloud: address for location of uploaded file
+        // Second argument is reference string
+        const newUploadRef = ref(storage, uniqueRefString);
+
+        // Uploading image file
+        uploadBytes(newUploadRef, blob).then(async (snapshot) => {
+          console.log('File has been uploaded successfully');
+        });
+      } else {
+        Alert.alert("Permissions haven't been granted");
+      }
+    }
+  };
 
   const getLocation = async () => {
     let permissions = await Location.requestForegroundPermissionsAsync();
 
     // ?. operator is a safe way to check for an object's property, because it wouldn't throw an error if `permissions` were undefined
     if (permissions?.granted) {
+      // (Empty configuration)
       const location = await Location.getCurrentPositionAsync({});
 
       if (location) {
@@ -32,7 +76,7 @@ const CustomActions = ({ iconTextStyle, onSend, wrapperStyle }) => {
   const onActionPress = () => {
     const options = [
       'Choose from Library',
-      'TakePicture',
+      'Take Picture',
       'Send Location',
       'Cancel',
     ];
@@ -49,7 +93,7 @@ const CustomActions = ({ iconTextStyle, onSend, wrapperStyle }) => {
         switch (buttonIndex) {
           // `case` is a label that matches value of expression, here: buttonIndex
           case 0:
-            console.log('user wants to pick an image');
+            pickImage();
             return;
           case 1:
             console.log('user wants to take a photo');

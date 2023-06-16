@@ -85,6 +85,7 @@ This project has the following dependencies:
 - "@react-native-community/netinfo": "9.3.7"
 - "expo-location": "~15.1.1",
 - "react-native-maps": "1.3.2"
+- "expo-image-picker": "~14.1.1"
 
 And dev dependencies:
 

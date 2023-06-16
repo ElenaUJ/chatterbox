@@ -19,7 +19,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import MapView from 'react-native-maps';
 import CustomActions from './CustomActions.js';
 
-const Chat = ({ db, isConnected, navigation, route }) => {
+const Chat = ({ db, isConnected, navigation, route, storage }) => {
   const [backgroundColor, setBackgroundColor] = useState('#090C08');
   const [messages, setMessages] = useState([]);
 
@@ -148,7 +148,7 @@ const Chat = ({ db, isConnected, navigation, route }) => {
   };
 
   const renderCustomActions = (props) => {
-    return <CustomActions {...props} />;
+    return <CustomActions storage={storage} userID={userID} {...props} />;
   };
 
   const renderCustomView = (props) => {
