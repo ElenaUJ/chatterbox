@@ -1,7 +1,7 @@
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import * as ImagePicker from 'expo-image-picker';
-import { ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import * as Location from 'expo-location';
 
 // wrapperStyle and iconTextStyle are props being passed from Chat.js, to potentially modify the component's style from outside of the component
@@ -24,6 +24,25 @@ const CustomActions = ({
     return `${userID}-${timeStamp}-${imageName}`;
   };
 
+  const uploadAndSendImage = async (imageURI) => {
+    const uniqueRefString = generateReference(imageURI);
+
+    // Creation of reference on Storage cloud: address for location of uploaded file
+    // Second argument is reference string
+    const newUploadRef = ref(storage, uniqueRefString);
+
+    const response = await fetch(imageURI);
+
+    // Firebase needs the image to be converted into a blob (binary large object)
+    const blob = await response.blob();
+
+    // Uploading image file
+    uploadBytes(newUploadRef, blob).then(async (snapshot) => {
+      const imageURL = await getDownloadURL(snapshot.ref);
+      onSend({ image: imageURL });
+    });
+  };
+
   const pickImage = async () => {
     let permissions = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -31,19 +50,7 @@ const CustomActions = ({
       let result = await ImagePicker.launchImageLibraryAsync();
 
       if (!result.canceled) {
-        const imageURI = result.assets[0].uri;
-        const uniqueRefString = generateReference(imageURI);
-        const response = await fetch(imageURI);
-        // Firebase needs the image to be converted into a blob (binary large object)
-        const blob = await response.blob();
-        // Creation of reference on Storage cloud: address for location of uploaded file
-        // Second argument is reference string
-        const newUploadRef = ref(storage, uniqueRefString);
-
-        // Uploading image file
-        uploadBytes(newUploadRef, blob).then(async (snapshot) => {
-          console.log('File has been uploaded successfully');
-        });
+        await uploadAndSendImage(result.assets[0].uri);
       } else {
         Alert.alert("Permissions haven't been granted");
       }
