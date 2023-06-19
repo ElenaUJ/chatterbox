@@ -57,6 +57,20 @@ const CustomActions = ({
     }
   };
 
+  const takePhoto = async () => {
+    let permissions = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (permissions?.granted) {
+      let result = await ImagePicker.launchCameraAsync();
+
+      if (!result.canceled) {
+        await uploadAndSendImage(result.assets[0].uri);
+      } else {
+        Alert.alert("Permissions haven't been granted.");
+      }
+    }
+  };
+
   const getLocation = async () => {
     let permissions = await Location.requestForegroundPermissionsAsync();
 
@@ -103,7 +117,7 @@ const CustomActions = ({
             pickImage();
             return;
           case 1:
-            console.log('user wants to take a photo');
+            takePhoto();
             return;
           case 2:
             getLocation();
