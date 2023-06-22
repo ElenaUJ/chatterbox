@@ -107,6 +107,7 @@ This project has the following dependencies:
 - "expo-location": "~15.1.1",
 - "react-native-maps": "1.3.2"
 - "expo-image-picker": "~14.1.1"
+- "expo-av": "~13.2.1"
 
 And dev dependencies:
 
