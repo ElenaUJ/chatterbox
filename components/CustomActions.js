@@ -61,12 +61,17 @@ const CustomActions = ({
     let permissions = await ImagePicker.requestCameraPermissionsAsync();
 
     if (permissions?.granted) {
-      let result = await ImagePicker.launchCameraAsync();
+      try {
+        let result = await ImagePicker.launchCameraAsync();
 
-      if (!result.canceled) {
-        await uploadAndSendImage(result.assets[0].uri);
-      } else {
-        Alert.alert("Permissions haven't been granted.");
+        if (!result.canceled) {
+          await uploadAndSendImage(result.assets[0].uri);
+        } else {
+          Alert.alert("Permissions haven't been granted.");
+        }
+      } catch (error) {
+        Alert.alert('Unable to launch the camera.');
+        console.error(error);
       }
     }
   };
