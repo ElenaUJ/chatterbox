@@ -15,8 +15,10 @@ import {
   getFirestore,
 } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+// Loading environmental variables (API key)
+import config from './config.js';
 
-//Importing useNetInfo to access latest value of network connection state (state object that updates automatically, like a React Hook)
+// Importing useNetInfo to access latest value of network connection state (state object that updates automatically, like a React Hook)
 // Best to be used in root/main component to have state available go=lobally
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useEffect } from 'react';
@@ -25,7 +27,7 @@ import { Alert } from 'react-native';
 const App = () => {
   // Configuration code has been generated in my firestore project in browser
   const firebaseConfig = {
-    apiKey: 'AIzaSyAXv04d-eVr0y3TJ3cZ2VwuchAGmGENF9c',
+    apiKey: config.FIREBASE_API_KEY,
     authDomain: 'chatterbox-9b48d.firebaseapp.com',
     projectId: 'chatterbox-9b48d',
     storageBucket: 'chatterbox-9b48d.appspot.com',

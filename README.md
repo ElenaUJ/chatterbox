@@ -18,7 +18,7 @@ It will provide users with a chat interface and options to share their images an
 
 ## How to Run
 
-_Prerequisites_
+**Prerequisites**
 
 Before running the React Native app on Expo, ensure you have the following prerequisites:
 
@@ -27,7 +27,7 @@ Before running the React Native app on Expo, ensure you have the following prere
 - Expo and Expo CLI (to install, run `npm install -g expo-cli`)
 - Expo Account
 
-_Installation_
+**Installation**
 
 Run following commands in your terminal:
 
@@ -40,12 +40,33 @@ Run following commands in your terminal:
 3. To install dependencies...
    `npm install`
 
-4. To start Expo development server...
-   `expo start` or `npm start`
+**Configuration**
 
-Scan the QR code with the Expo Go app on your iOS or Android device, or select an emulator to run the app!
+4. Create a `config.js` file in the root directory of the project.
 
-_Testing_
+5. Open the `config.js` file and add the following lines:
+
+```
+const config = {
+FIREBASE_API_KEY: "your_firebase_api_key",
+};
+
+export default config;
+```
+
+Replace your_firebase_api_key with your actual Firebase API key.
+
+\_Note: Do not share your config.js file or commit it to version control systems as it contains sensitive information, including your Firebase API key. Keep it secure and accessible only to authorized individuals.\*
+
+6. Save the `config.js` file.
+
+**Running the app**
+
+7. Start the Expo development server by running `npx expo start` in your terminal.
+
+8. Scan the QR code with the Expo Go app on your iOS or Android device, or select an emulator to run the app!
+
+**Testing**
 
 To test the app you can use:
 
