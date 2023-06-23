@@ -3,18 +3,30 @@
 ## Table of Contents
 
 - [Overview](#overview)
+  - [Core Features](#core-features)
 - [How to Run](#how-to-run)
 - [Links](#links)
 - [Process](#process)
   - [Technologies used](#technologies-used)
   - [Dependencies](#dependencies)
-- [Features](#features)
 
 ## Overview
 
-This app is still under construction. It is built with React Native and Expo, JavaScript frameworks facilitating the development of cross-platform native applications. The implementation includes the utilization of the Google Firestore Cloud database and incorporates the real-time WebSockets protocol for the storage and retrieval of chat messages. Messages will be stored locally using the React Native AsyncStorage library.
+This app is built with React Native and Expo, JavaScript frameworks facilitating the development of cross-platform native applications. The implementation includes the utilization of the Google Firestore Cloud database and incorporates the real-time WebSockets protocol for the storage and retrieval of chat messages. Messages are stored locally using the React Native AsyncStorage library.
 
-It will provide users with a chat interface and options to share their images and their location.
+The app provides users with a chat interface and options to share their images and their location using Expo's ImagePicker and Location APIs.
+
+**Compatibility Note:** Please be aware that the camera function is currently incompatible with devices running Android 13 operating system. However, all other features and functionalities of the app are fully accessible on all supported platforms.
+
+### Core Features
+
+- A start page where users can enter their name and choose a background color for the chat screen before joining the chat.
+
+- A chat page displaying the conversation, as well as an input field and submit button.
+
+- Two additional communication features: sending images and location data.
+
+- Data gets stored online and offline.
 
 ## How to Run
 
@@ -32,7 +44,7 @@ Before running the React Native app on Expo, ensure you have the following prere
 Run following commands in your terminal:
 
 1. To clone the repository...
-   `git clone https://github.com/your/repository.git`
+   `git clone https://github.com/ElenaUJ/chatterbox.git`
 
 2. To navigate to the project directory...
    `cd chatterbox`
@@ -76,7 +88,6 @@ To test the app you can use:
 
 ## Links
 
-- [Live site URL]()
 - [Code URL](https://github.com/ElenaUJ/chatterbox)
 
 ## Process
@@ -87,42 +98,34 @@ To test the app you can use:
 - Expo
 - Google Firestore
 - AsyncStorage
+- ImagePicker API
+- Location API
 
 ### Dependencies
 
 This project has the following dependencies:
 
-- "@react-navigation/native": "^6.1.6",
-- "@react-navigation/native-stack": "^6.9.12",
-- "expo": "~48.0.18",
-- "expo-status-bar": "~1.4.4",
-- "firebase": "^9.13.0",
-- "react": "18.2.0",
-- "react-native": "0.71.8",
-- "react-native-gifted-chat": "^2.1.0",
-- "react-native-safe-area-context": "^4.5.0",
-- "react-native-screens": "^3.20.0"
-- "@react-native-async-storage/async-storage": "1.17.11"
-- "@react-native-community/netinfo": "9.3.7"
-- "expo-location": "~15.1.1",
-- "react-native-maps": "1.3.2"
-- "expo-image-picker": "~14.1.1"
+- @react-native-async-storage/async-storage: 1.17.11
+- @react-native-community/netinfo: 9.3.7
+- @react-navigation/native: ^6.1.6
+- @react-navigation/native-stack: ^6.9.12
+- expo: ~48.0.18
+- expo-image-picker: ~14.1.1
+- expo-location: ~15.1.1
+- expo-status-bar: ~1.4.4
+- firebase: ^9.13.0
+- react: 18.2.0
+- react-native: 0.71.8
+- react-native-gifted-chat: ^2.1.0
+- react-native-maps: 1.3.2
+- react-native-safe-area-context: 4.5.0
+- react-native-screens: ^3.20.0
 
 And dev dependencies:
 
-- "@babel/core": "^7.20.0"
+- @babel/core: ^7.20.0
 
 Furthermore, it uses the following linting configuration:
 
 - [ESLint rules](https://github.com/mydea/simple-pokedex-app/blob/master/.eslintrc)
 - [Prettier configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
-
-## Features
-
-- A start page where users can enter their name and choose a background color for the chat screen before joining the chat.
-
-- A chat page displaying the conversation, as well as an input field and submit button.
-
-- Two additional communication features: sending images and location data.
-
-- Data gets stored online and offline.
