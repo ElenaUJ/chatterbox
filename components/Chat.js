@@ -157,20 +157,28 @@ const Chat = ({ db, isConnected, navigation, route, storage }) => {
 
     if (currentLocation) {
       return (
-        <MapView
+        <View
           style={{
+            borderRadius: 13,
+            overflow: 'hidden',
             width: 150,
             height: 100,
-            borderRadius: 13,
             margin: 3,
           }}
-          region={{
-            latitude: currentLocation.latitude,
-            longitude: currentLocation.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-        />
+        >
+          <MapView
+            style={{
+              height: '100%',
+              width: '100%',
+            }}
+            region={{
+              latitude: currentLocation.latitude,
+              longitude: currentLocation.longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+          />
+        </View>
       );
     }
     return null;
