@@ -39,6 +39,14 @@ Before running the React Native app on Expo, ensure you have the following prere
 - Expo and Expo CLI (to install, run `npm install -g expo-cli`)
 - Expo Account
 
+**Testing**
+
+To test the app you can use:
+
+- Android Studio and Android SDK (for Android development)
+- Expo Go App (to test on your own mobile device)
+- Xcode (for iOS development, macOS only)
+
 **Installation**
 
 Run following commands in your terminal:
@@ -60,40 +68,33 @@ Run following commands in your terminal:
 
 6. [Create a Firebase project](https://firebase.google.com/docs/web/setup#create-project) by following steps 1 through 5.
 
-7. Next, [register your app](https://firebase.google.com/docs/web/setup#register-app) by following steps 1 through 3. Copy the `firebaseConfig` code block provided.
+7. Next, [register your app](https://firebase.google.com/docs/web/setup#register-app) by following steps 1 through 3. Copy the `firebaseConfig` code block provided after `// Your web app's Firebase configuration `.
 
 8. Open the `config.js` file you created earlier. Paste and export the `firebaseConfig` object as follows:
 
-```
-const firebaseConfig = {
-   apiKey: "YOUR_API_KEY",
-   authDomain: "YOUR_AUTH_DOMAIN",
-   projectId: "YOUR_PROJECT_ID",
-   storageBucket: "YOUR_STORAGE_BUCKET",
-   messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-   appId: "YOUR_APP_ID"
-};
+   ```
+   // Replace placeholders with your Firebase project configuration
+   const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+   };
 
-export default firebaseConfig;
-```
+   export default firebaseConfig;
+   ```
 
-6. update the necessary values within the `firebaseConfig` object to match your Firebase project configuration and then save the file.
+   Then save the file.
 
-_Note: Do not share your config.js file or commit it to version control systems as it contains sensitive information, including your Firebase API key. Keep it secure and accessible only to authorized individuals._
+   _Note: Do not share your config.js file or commit it to version control systems as it contains sensitive information, including your Firebase API key. Keep it secure and accessible only to authorized individuals._
 
 **Running the app**
 
-7. Start the Expo development server by running `npx expo start` in your terminal.
+10. Start the Expo development server by running `npx expo start` in your terminal.
 
-8. Scan the QR code with the Expo Go app on your iOS or Android device, or select an emulator to run the app!
-
-**Testing**
-
-To test the app you can use:
-
-- Android Studio and Android SDK (for Android development)
-- Expo Go App (to test on your own mobile device)
-- Xcode (for iOS development, macOS only)
+11. Scan the QR code with the Expo Go app on your iOS or Android device, or select an emulator to run the app!
 
 ## Links
 
