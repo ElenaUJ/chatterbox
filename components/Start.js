@@ -28,7 +28,6 @@ const Start = ({ navigation }) => {
   // Initialization of Firebase authentication handler
   const auth = getAuth();
 
-  // Sign-in logic function (signInAnonymously returns a promise and an information object with the temporary user account)
   const signInUser = () => {
     signInAnonymously(auth)
       .then((result) => {
