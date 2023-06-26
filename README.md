@@ -54,23 +54,32 @@ Run following commands in your terminal:
 
 **Configuration**
 
-4. Create a `config.js` file in the root directory of the project.
+4. Open the folder and create a `config.js` file in the root directory of the project.
 
-5. Open the `config.js` file and add the following lines:
+5. (Optional) If you don't have a Firebase account yet, [create one](https://firebase.google.com/).
+
+6. [Create a Firebase project](https://firebase.google.com/docs/web/setup#create-project) by following steps 1 through 5.
+
+7. Next, [register your app](https://firebase.google.com/docs/web/setup#register-app) by following steps 1 through 3. Copy the `firebaseConfig` code block provided.
+
+8. Open the `config.js` file you created earlier. Paste and export the `firebaseConfig` object as follows:
 
 ```
-const config = {
-FIREBASE_API_KEY: "your_firebase_api_key",
+const firebaseConfig = {
+   apiKey: "YOUR_API_KEY",
+   authDomain: "YOUR_AUTH_DOMAIN",
+   projectId: "YOUR_PROJECT_ID",
+   storageBucket: "YOUR_STORAGE_BUCKET",
+   messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+   appId: "YOUR_APP_ID"
 };
 
-export default config;
+export default firebaseConfig;
 ```
 
-Replace your_firebase_api_key with your actual Firebase API key.
+6. update the necessary values within the `firebaseConfig` object to match your Firebase project configuration and then save the file.
 
-\_Note: Do not share your config.js file or commit it to version control systems as it contains sensitive information, including your Firebase API key. Keep it secure and accessible only to authorized individuals.\*
-
-6. Save the `config.js` file.
+_Note: Do not share your config.js file or commit it to version control systems as it contains sensitive information, including your Firebase API key. Keep it secure and accessible only to authorized individuals._
 
 **Running the app**
 
