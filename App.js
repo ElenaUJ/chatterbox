@@ -2,8 +2,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
-
-//Importing screens
 import Start from './components/Start.js';
 import Chat from './components/Chat.js';
 
@@ -15,17 +13,14 @@ import {
   getFirestore,
 } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
-// Loading firebase configuration
 import firebaseConfig from './config.js';
 
-// Importing useNetInfo to access latest value of network connection state (state object that updates automatically, like a React Hook)
-// Best to be used in root/main component to have state available go=lobally
+// Importing useNetInfo to access latest value of network connection state
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useEffect } from 'react';
 import { Alert } from 'react-native';
 
 const App = () => {
-  // Initialization of Firebase and Cloud Firestore database (should be done in root component) as well as storage for images
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const storage = getStorage(app);
@@ -34,7 +29,6 @@ const App = () => {
   // Firebase reconnection attempts are to be disabled when user if offline/reenabled when user is online
   const connectionStatus = useNetInfo();
   useEffect(() => {
-    // ===false because ! would also be truthy for null which is is useNetInfo(),s initial value
     if (connectionStatus.isConnected === false) {
       Alert.alert('Connection lost!');
       disableNetwork(db);
@@ -47,7 +41,6 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Start">
         <Stack.Screen name="Start" component={Start} />
-        {/* To pass the db reference as a prop, this format can be used */}
         <Stack.Screen name="Chat">
           {(props) => (
             <Chat
