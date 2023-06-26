@@ -52,8 +52,10 @@ const CustomActions = ({
       if (!result.canceled) {
         await uploadAndSendImage(result.assets[0].uri);
       } else {
-        Alert.alert("Permissions haven't been granted");
+        Alert.alert('Image selection canceled');
       }
+    } else {
+      Alert.alert('Permissions not granted');
     }
   };
 
@@ -67,12 +69,14 @@ const CustomActions = ({
         if (!result.canceled) {
           await uploadAndSendImage(result.assets[0].uri);
         } else {
-          Alert.alert("Permissions haven't been granted.");
+          Alert.alert('Camera capture canceled');
         }
       } catch (error) {
-        Alert.alert('Unable to launch the camera.');
+        Alert.alert('Unable to launch camera');
         console.error(error);
       }
+    } else {
+      Alert.alert('Permissions not granted');
     }
   };
 
@@ -95,7 +99,7 @@ const CustomActions = ({
         Alert.alert('Error occurred while fetching location');
       }
     } else {
-      Alert.alert("Permissions haven't been granted");
+      Alert.alert('Permissions not granted');
     }
   };
 
