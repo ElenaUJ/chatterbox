@@ -12,8 +12,7 @@
 
 ## Overview
 
-![Screenshot of the app's main page](assets/screenshot_welcome.jpg)
-![Screenshot of the app's chat page](assets/screenshot_chat.jpg)
+![Screenshot of the app's main page](assets/screenshot_welcome.jpg) ![Screenshot of the app's chat page](assets/screenshot_chat.jpg)
 
 This app is built with React Native and Expo, JavaScript frameworks facilitating the development of cross-platform native applications. The implementation includes the utilization of the Google Firestore Cloud database and incorporates the real-time WebSockets protocol for the storage and retrieval of chat messages. Messages are stored locally using the React Native AsyncStorage library.
 
