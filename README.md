@@ -5,19 +5,12 @@
 - [Overview](#overview)
 - [Links](#links)
 - [Features](#features)
-- [Getting Started](#getting-started)
 - [Process](#process)
   - [Main Technologies and Dependencies](#main-technologies-and-dependencies)
   - [Linting and Formatting](#linting-and-formatting)
+- [Getting Started](#getting-started)
 
 ## Overview
-
-<table>
-  <tr>
-    <td><img src="assets/screenshot_welcome.jpg"></td>
-    <td><img src="assets/screenshot_chat.jpg"></td>
-  </tr>
- </table>
 
 This app is built with React Native and Expo, JavaScript frameworks facilitating the development of cross-platform native applications. The implementation includes the utilization of the Google Firestore Cloud database and incorporates the real-time WebSockets protocol for the storage and retrieval of chat messages. Messages are stored locally using the React Native AsyncStorage library.
 
@@ -38,6 +31,26 @@ The app provides users with a chat interface and options to share their images a
 - Two additional communication features: sending images and location data.
 
 - Data gets stored online and offline.
+
+<table>
+  <tr>
+    <td><img src="assets/screenshot_welcome.jpg"></td>
+    <td><img src="assets/screenshot_chat.jpg"></td>
+  </tr>
+ </table>
+
+## Process
+
+### Main Technologies and Dependencies
+
+**Technologies:** React Native, Expo, Google Firestore, AsyncStorage, ImagePicker API, Location API
+
+**Dependencies:** For a complete list of dependencies, please refer to the [package.json](./package.json) file.
+
+### Linting and Formatting
+
+- ESLint Rules: [View rules](https://github.com/mydea/simple-pokedex-app/blob/master/.eslintrc)
+- Prettier configuration: [View configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
 
 ## Getting Started
 
@@ -106,16 +119,3 @@ Run following commands in your terminal:
 10. Start the Expo development server by running `npx expo start` in your terminal.
 
 11. Scan the QR code with the Expo Go app on your iOS or Android device, or select an emulator to run the app!
-
-## Process
-
-### Main Technologies and Dependencies
-
-**Technologies:** React Native, Expo, Google Firestore, AsyncStorage, ImagePicker API, Location API
-
-**Dependencies:** For a complete list of dependencies, please refer to the [package.json](./package.json) file.
-
-### Linting and Formatting
-
-- ESLint Rules: [View rules](https://github.com/mydea/simple-pokedex-app/blob/master/.eslintrc)
-- Prettier configuration: [View configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
