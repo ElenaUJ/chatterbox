@@ -3,14 +3,17 @@
 ## Table of Contents
 
 - [Overview](#overview)
-  - [Core Features](#core-features)
-- [How to Run](#how-to-run)
 - [Links](#links)
+- [Features](#features)
+- [Getting Started](#getting-started)
 - [Process](#process)
-  - [Technologies used](#technologies-used)
-  - [Dependencies](#dependencies)
+  - [Main Technologies and Dependencies](#main-technologies-and-dependencies)
+  - [Linting and Formatting](#linting-and-formatting)
 
 ## Overview
+
+![Screenshot of the app's main page](assets/screenshot_welcome.jpg)
+![Screenshot of the app's chat page](assets/screenshot_chat.jpg)
 
 This app is built with React Native and Expo, JavaScript frameworks facilitating the development of cross-platform native applications. The implementation includes the utilization of the Google Firestore Cloud database and incorporates the real-time WebSockets protocol for the storage and retrieval of chat messages. Messages are stored locally using the React Native AsyncStorage library.
 
@@ -18,7 +21,11 @@ The app provides users with a chat interface and options to share their images a
 
 **Compatibility Note:** Please be aware that the camera function is currently incompatible with devices running Android 13 operating system. However, all other features and functionalities of the app are fully accessible on all supported platforms.
 
-### Core Features
+## Links
+
+- [Code URL](https://github.com/ElenaUJ/chatterbox)
+
+## Features
 
 - A start page where users can enter their name and choose a background color for the chat screen before joining the chat.
 
@@ -28,7 +35,7 @@ The app provides users with a chat interface and options to share their images a
 
 - Data gets stored online and offline.
 
-## How to Run
+## Getting Started
 
 **Prerequisites**
 
@@ -72,15 +79,15 @@ Run following commands in your terminal:
 
 8. Open the `config.js` file you created earlier. Paste and export the `firebaseConfig` object as follows:
 
-   ```
+   ```javascript
    // Replace placeholders with your Firebase project configuration
    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
+     apiKey: 'YOUR_API_KEY',
+     authDomain: 'YOUR_AUTH_DOMAIN',
+     projectId: 'YOUR_PROJECT_ID',
+     storageBucket: 'YOUR_STORAGE_BUCKET',
+     messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+     appId: 'YOUR_APP_ID',
    };
 
    export default firebaseConfig;
@@ -96,46 +103,15 @@ Run following commands in your terminal:
 
 11. Scan the QR code with the Expo Go app on your iOS or Android device, or select an emulator to run the app!
 
-## Links
-
-- [Code URL](https://github.com/ElenaUJ/chatterbox)
-
 ## Process
 
-### Technologies Used
+### Main Technologies and Dependencies
 
-- React Native
-- Expo
-- Google Firestore
-- AsyncStorage
-- ImagePicker API
-- Location API
+**Technologies:** React Native, Expo, Google Firestore, AsyncStorage, ImagePicker API, Location API
 
-### Dependencies
+**Dependencies:** For a complete list of dependencies, please refer to the [package.json](./package.json) file.
 
-This project has the following dependencies:
+### Linting and Formatting
 
-- @react-native-async-storage/async-storage: 1.17.11
-- @react-native-community/netinfo: 9.3.7
-- @react-navigation/native: ^6.1.6
-- @react-navigation/native-stack: ^6.9.12
-- expo: ~48.0.18
-- expo-image-picker: ~14.1.1
-- expo-location: ~15.1.1
-- expo-status-bar: ~1.4.4
-- firebase: ^9.13.0
-- react: 18.2.0
-- react-native: 0.71.8
-- react-native-gifted-chat: ^2.1.0
-- react-native-maps: 1.3.2
-- react-native-safe-area-context: 4.5.0
-- react-native-screens: ^3.20.0
-
-And dev dependencies:
-
-- @babel/core: ^7.20.0
-
-Furthermore, it uses the following linting configuration:
-
-- [ESLint rules](https://github.com/mydea/simple-pokedex-app/blob/master/.eslintrc)
-- [Prettier configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
+- ESLint Rules: [View rules](https://github.com/mydea/simple-pokedex-app/blob/master/.eslintrc)
+- Prettier configuration: [View configuration](https://stackoverflow.com/questions/55430906/prettier-single-quote-for-javascript-and-json-double-quote-for-html-sass-and-c)
